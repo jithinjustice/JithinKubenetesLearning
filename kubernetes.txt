@@ -1,0 +1,26 @@
+kubernetes
+Master Architectue
+1)api server
+it is responsible for exposing various api's.kubernetes is highly api centered.it forms the frontend 
+or gatekeeper for the entire cluster.
+kubectl - very tiny go language binary,which basically talks to api server.
+2)scheduler - it is responsible for physically scheduling the artifacts(containers or pods)across multiple nodes.
+ it will look for the appr nodes that meets the criteria and schedule the pods appro.
+3)Controller - It is resposible for overall coordination and health of the cluster.it will ensure that nodes
+are up and running and pods are behaving the right way and desired state is maintained all the time.
+4)etcd - it is key-value database which is light weight developed by coreOS.it is the central db where we
+will store the current cluster state.
+
+Nodes Architecture
+1)Kube proxy - Responsible for maintaining the entire network configuration.it manipulates ip tables on
+each nodes each host to make sure that n/w conf is intact.one pod can talk to another pod.one node can
+talk to another node.one container to another container.it also exposes services.it ensures the communication 
+is maintained effectively across all the elements of the cluster.
+2)kubelet - it is the agent responsible for talking to the api and master will talk to kubelet,metrix,health
+and current state of node to etcd and kube master.
+
+both docker and kubelet packag ed to supervisord layer.supervisord is a process manager layer where we can run
+multiple processes inside one parent process.
+fluentd - responsible for logs and central logging mechanism.
+nodes are responsible for running multiple pods.
+nodes also runs add-ons like dns,ui.
